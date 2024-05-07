@@ -51,6 +51,11 @@ Run migrations:
 php artisan migrate
 ```
 
+Run migrations on test environment:
+```bash
+php artisan migrate --env=testing
+```
+
 Run tests:
 ```bash
 php artisan test
