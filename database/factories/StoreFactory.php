@@ -19,10 +19,6 @@ class StoreFactory extends Factory
      */
     public function definition(): array
     {
-        // Define regex pattern for UK coordinates (roughly)
-        $lat = $this->faker->latitude(50, 60);
-        $lon = $this->faker->longitude(-8, 2);
-
         $firstUserId = User::getFirstAdminOrModerator();
 
         if (null === $firstUserId) {
@@ -31,7 +27,8 @@ class StoreFactory extends Factory
 
         return [
             'name' => $this->faker->company,
-            'geo_coordinates' => $lat . ',' . $lon,
+            'lat' => $this->faker->latitude(50, 60), // Define regex pattern for UK lat (roughly)
+            'long' => $this->faker->longitude(-8, 2), // Define regex pattern for UK long (roughly)
             'is_open' => $this->faker->boolean,
             'store_type' => $this->faker->randomElement(StoreEnum::cases() ?? []),
             'max_delivery_distance' => $this->faker->numberBetween(10, 50),

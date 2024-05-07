@@ -15,8 +15,8 @@ class AddIndexesToStoresTable extends Migration
     public function up()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->rawIndex("(CAST(SUBSTRING_INDEX(geo_coordinates, ',', 1) AS DECIMAL(10, 6)))", 'idx_lat');
-            $table->rawIndex("(CAST(SUBSTRING_INDEX(geo_coordinates, ',', -1) AS DECIMAL(10, 6)))", 'idx_lng');
+            $table->index('lat', 'idx_lat');
+            $table->index('long', 'idx_long');
             $table->index('is_open', 'idx_open');
             $table->index('max_delivery_distance', 'idx_distance');
         });
@@ -31,7 +31,7 @@ class AddIndexesToStoresTable extends Migration
     {
         Schema::table('stores', function (Blueprint $table) {
             $table->dropIndex('idx_lat');
-            $table->dropIndex('idx_lng');
+            $table->dropIndex('idx_long');
             $table->dropIndex('idx_open');
             $table->dropIndex('idx_distance');
         });

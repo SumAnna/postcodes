@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('postcodes', function (Blueprint $table) {
-            $table->index(['lat', 'long'], 'idx_lat_long');
+            $table->index('lat', 'idx_lat');
+            $table->index('long', 'idx_long');
             $table->index('pcd', 'idx_pcd');
         });
     }
@@ -23,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('postcodes', function (Blueprint $table) {
-            $table->dropIndex('idx_lat_long');
+            $table->dropIndex('idx_lat');
+            $table->dropIndex('idx_long');
+            $table->dropIndex('idx_pcd');
         });
     }
 };

@@ -16,9 +16,12 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('geo_coordinates');
+            $table->decimal('lat', 10, 8);
+            $table->decimal('long', 11, 8);
             $table->boolean('is_open');
-            $table->enum('store_type', EnumHelper::getEnumValues(StoreEnum::cases() ?? []));
+            $table->enum('store_type',
+                EnumHelper::getEnumValues(StoreEnum::cases() ?? [])
+            );
             $table->double('max_delivery_distance');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

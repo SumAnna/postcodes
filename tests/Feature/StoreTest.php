@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Exception;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 use App\Models\User;
@@ -16,8 +15,6 @@ class StoreTest extends TestCase
 
     /**
      * Test store creation with dynamic user roles.
-     *
-     * @throws Exception
      */
     #[DataProvider('roleProvider')]
     public function testStoreCreationWithRole(string $role, bool $shouldBeInDatabase): void
@@ -27,7 +24,8 @@ class StoreTest extends TestCase
 
         $response = $this->actingAs($user)->post('/store/add', [
             'name' => $name,
-            'geo_coordinates' => '10.32424,10.34234',
+            'lat' => 10.32424,
+            'long' => 10.34234,
             'is_open' => true,
             'store_type' => StoreEnum::RESTAURANT->value,
             'max_delivery_distance' => 10.5,
@@ -56,20 +54,12 @@ class StoreTest extends TestCase
 
     /**
      * Create a user with a specific role.
-     *
-     * @throws Exception
      */
     private function createUserWithRole(string $role): User
     {
-        $user = User::factory()->create([
+        return User::factory()->create([
             'role' => $role,
             'name' => 'Test '.ucfirst($role).' User',
         ]);
-
-        if (!$user->exists) {
-            throw new Exception("User could not be created.");
-        }
-
-        return $user;
     }
 }

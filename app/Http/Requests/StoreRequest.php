@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Enums\StoreEnum;
 use App\Helpers\EnumHelper;
-use App\Rules\GeoCoordinates;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -19,11 +18,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'geo_coordinates' => [
-                'required',
-                'string',
-                new GeoCoordinates(),
-            ],
+            'lat' => 'required|numeric|between:-90,90',
+            'long' => 'required|numeric|between:-180,180',
             'is_open' => 'required|boolean',
             'store_type' => [
                 'required',
