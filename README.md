@@ -27,7 +27,6 @@ cd your-project-name
 Install dependencies:
 ```bash
 composer install
-npm install
 ```
 
 Create .env file:
@@ -41,6 +40,11 @@ cp .env.example .env.testing
 ```
 
 Update .env and .env.testing configurations for your needs.<br/>
+
+Generate Application Key:
+```bash
+php artisan key:generate
+```
 
 Run migrations:
 ```bash
