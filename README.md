@@ -35,16 +35,21 @@ Create .env file:
 cp .env.example .env
 ```
 
-Create .env file:
+Create .env.testing file for tests:
 ```bash
-cp .env.example .env
+cp .env.example .env.testing
 ```
 
-Update .env configuration regarding your needs.<br/>
+Update .env and .env.testing configurations for your needs.<br/>
 
 Run migrations:
 ```bash
 php artisan migrate
+```
+
+Run tests:
+```bash
+php artisan test
 ```
 
 Run seeds:
