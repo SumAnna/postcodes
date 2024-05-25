@@ -23,9 +23,9 @@ class UploadPostcodes extends Command
         ini_set('memory_limit', -1);
 
         $url = 'https://parlvid.mysociety.org/os/ONSPD/2022-11.zip';
-        $extractPath = 'public/postcodes';
-        $path = 'public/postcodes.zip';
-        $localPath = 'public/postcodes/Data';
+        $extractPath = 'postcodes';
+        $path = 'postcodes.zip';
+        $localPath = 'postcodes/Data';
 
         $this->info("Dispatching job to download file from: $url");
 

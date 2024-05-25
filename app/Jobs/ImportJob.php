@@ -89,7 +89,7 @@ class ImportJob implements ShouldQueue
 
                 if (!empty($data)) {
                     Try {
-                        Postcode::insert($data);
+                        Postcode::upsert($data, ['pcd'], ['lat', 'long', 'updated_at']);
                     } catch(Exception $e) {
                         Log::error(sprintf('Error occurred when inserting postcodes into DB: %s', $e->getMessage()));
 

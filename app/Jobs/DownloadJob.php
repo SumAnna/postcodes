@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class DownloadJob implements ShouldQueue
 {
@@ -40,7 +41,7 @@ class DownloadJob implements ShouldQueue
             return;
         }
 
-        $dest = fopen($this->path, 'w');
+        $dest = fopen(Storage::disk('local')->path($this->path), 'w');
         if (!$dest) {
             fclose($resource);
             Log::error(sprintf("Failed to open the destination path: %s", $this->path));
